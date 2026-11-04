@@ -60,13 +60,13 @@ struct LockView: View {
                 BrandMark(style: .onGreen)
                     .frame(width: 96, height: 96)
                 Text("WijkHub is locked")
-                    .font(.title3.weight(.semibold))
+                    .font(.app(.title3, .semibold))
                     .foregroundStyle(.white)
                 Button {
                     Task { await lock.unlock() }
                 } label: {
                     Label("Unlock", systemImage: "faceid")
-                        .font(.headline)
+                        .font(.app(.headline))
                         .padding(.horizontal, 24).padding(.vertical, 12)
                         .background(.white, in: Capsule())
                         .foregroundStyle(Theme.green)

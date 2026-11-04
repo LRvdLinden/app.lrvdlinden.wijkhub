@@ -22,20 +22,20 @@ struct ListingDetailView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack {
                         Label(listing.soort.label, systemImage: listing.soort == .markt ? "tag" : "gift")
-                            .font(.caption.weight(.semibold))
+                            .font(.app(.caption, .semibold))
                             .foregroundStyle(Theme.accent)
                         if listing.status != .beschikbaar {
                             StatusBadge(status: listing.status, kind: listing.soort)
                         }
                     }
-                    Text(listing.titel).font(.title2.bold())
-                    Text(listing.priceText).font(.title3.weight(.bold)).foregroundStyle(Theme.accent)
+                    Text(listing.titel).font(.display(.title2))
+                    Text(listing.priceText).font(.app(.title3, .bold)).foregroundStyle(Theme.accent)
                     HStack(spacing: 6) {
                         Label(listing.category.label, systemImage: listing.category.symbol)
                         Text(verbatim: "·")
                         Text(listing.createdAt.formatted(.relative(presentation: .named)))
                     }
-                    .font(.subheadline)
+                    .font(.app(.subheadline))
                     .foregroundStyle(.secondary)
                 }
 
@@ -47,8 +47,8 @@ struct ListingDetailView: View {
                     HStack(spacing: 12) {
                         Avatar(path: listing.authorAvatar, name: listing.authorName, size: 44)
                         VStack(alignment: .leading) {
-                            Text(listing.authorName).font(.headline)
-                            Text(model.wijk?.naam ?? "").font(.subheadline).foregroundStyle(.secondary)
+                            Text(listing.authorName).font(.app(.headline))
+                            Text(model.wijk?.naam ?? "").font(.app(.subheadline)).foregroundStyle(.secondary)
                         }
                         Spacer()
                         Image(systemName: "chevron.right").foregroundStyle(.tertiary)
@@ -111,13 +111,13 @@ struct ListingDetailView: View {
 
     private var ownerActions: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Status").font(.headline)
+            Text("Status").font(.app(.headline))
             Picker("Status", selection: Binding(get: { listing.status }, set: { new in Task { await setStatus(new) } })) {
                 ForEach(ListingStatus.allCases) { Text($0.label(for: listing.soort)).tag($0) }
             }
             .pickerStyle(.segmented)
             Text("Neighbours can see the status. Sold and given-away items are hidden in the market unless someone chooses to show them.")
-                .font(.footnote)
+                .font(.app(.footnote))
                 .foregroundStyle(.secondary)
         }
         .padding(14)

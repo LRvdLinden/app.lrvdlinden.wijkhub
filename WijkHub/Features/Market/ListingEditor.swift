@@ -82,7 +82,7 @@ struct ListingEditor: View {
                     Text("Photos")
                 }
                 if let error {
-                    Section { Text(error).foregroundStyle(.red).font(.footnote) }
+                    Section { Text(error).foregroundStyle(.red).font(.app(.footnote)) }
                 }
             }
             .navigationTitle(existing == nil ? LocalizedStringKey("Place an ad") : LocalizedStringKey("Edit ad"))

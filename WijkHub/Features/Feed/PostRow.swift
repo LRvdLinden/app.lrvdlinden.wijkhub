@@ -19,7 +19,7 @@ struct PostRow: View {
         VStack(alignment: .leading, spacing: 12) {
             header
             Text(post.body)
-                .font(.body)
+                .font(.app(.body))
                 .textSelection(.enabled)
                 .frame(maxWidth: .infinity, alignment: .leading)
             if !post.imagePaths.isEmpty {
@@ -32,7 +32,7 @@ struct PostRow: View {
         .overlay(RoundedRectangle(cornerRadius: 18, style: .continuous).strokeBorder(Theme.line))
         .overlay(alignment: .topTrailing) {
             if post.hidden {
-                Text("Hidden").font(.caption2.bold()).padding(6)
+                Text("Hidden").font(.app(.caption2, .bold)).padding(6)
                     .background(.orange.opacity(0.2), in: Capsule()).padding(10)
             }
         }
@@ -58,17 +58,17 @@ struct PostRow: View {
             .accessibilityLabel(Text(post.authorName))
             VStack(alignment: .leading, spacing: 2) {
                 Text(post.authorName.isEmpty ? String(localized: "Neighbour") : post.authorName)
-                    .font(.subheadline.weight(.semibold))
+                    .font(.app(.subheadline, .semibold))
                 HStack(spacing: 6) {
                     if showGroup {
                         Label(post.groupNaam, systemImage: post.groupSoort.symbol)
                             .labelStyle(.titleAndIcon)
-                            .font(.caption.weight(.medium))
+                            .font(.app(.caption, .medium))
                             .foregroundStyle(Theme.accent)
                         Text(verbatim: "·").foregroundStyle(.secondary)
                     }
                     Text(post.createdAt.formatted(.relative(presentation: .named)))
-                        .font(.caption)
+                        .font(.app(.caption))
                         .foregroundStyle(.secondary)
                 }
             }
@@ -138,7 +138,7 @@ struct PostRow: View {
             }
             .accessibilityLabel(Text("Share"))
         }
-        .font(.subheadline)
+        .font(.app(.subheadline))
         .frame(minHeight: 32)
     }
 
@@ -237,7 +237,7 @@ private struct PhotoViewer: View {
             }
             Button { dismiss() } label: {
                 Image(systemName: "xmark")
-                    .font(.headline)
+                    .font(.app(.headline))
                     .padding(12)
                     .background(.ultraThinMaterial, in: Circle())
             }

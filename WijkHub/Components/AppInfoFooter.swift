@@ -28,7 +28,7 @@ struct AppInfoFooter: View {
             Text(verbatim: "\(AppInfoText.current.version): \(version) (\(build))")
             Text(verbatim: "© \(year) \(appName)")
         }
-        .font(.subheadline)
+        .font(.app(.subheadline))
         .foregroundStyle(.secondary)
         .multilineTextAlignment(.center)
         .frame(maxWidth: .infinity)

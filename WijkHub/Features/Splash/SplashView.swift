@@ -15,7 +15,7 @@ struct SplashView: View {
                     .frame(width: 120, height: 120)
                     .scaleEffect(markScale)
                 (Text(verbatim: "Wijk").foregroundStyle(.white) + Text(verbatim: "Hub").foregroundStyle(Color(red: 0xB9 / 255, green: 0xE0 / 255, blue: 0x8A / 255)))
-                    .font(.system(size: 40, weight: .heavy, design: .rounded))
+                    .font(.display(size: 44))
                     .opacity(showWord ? 1 : 0)
                     .offset(y: showWord ? 0 : 8)
             }

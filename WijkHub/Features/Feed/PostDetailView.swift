@@ -25,12 +25,12 @@ struct PostDetailView: View {
                 }
 
                 Text("Comments")
-                    .font(.headline)
+                    .font(.app(.headline))
                     .padding(.top, 4)
 
                 if comments.isEmpty {
                     Text("No comments yet.")
-                        .font(.subheadline)
+                        .font(.app(.subheadline))
                         .foregroundStyle(.secondary)
                 }
                 ForEach(comments) { comment in
@@ -67,7 +67,7 @@ struct PostDetailView: View {
                 .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.line))
             Button { Task { await send() } } label: {
                 Image(systemName: "arrow.up")
-                    .font(.headline)
+                    .font(.app(.headline))
                     .frame(width: 40, height: 40)
                     .background(Theme.accent, in: Circle())
                     .foregroundStyle(Theme.onAccent)
@@ -127,11 +127,11 @@ private struct CommentRow: View {
             .buttonStyle(.plain)
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Text(comment.authorName).font(.subheadline.weight(.semibold))
+                    Text(comment.authorName).font(.app(.subheadline, .semibold))
                     Text(comment.createdAt.formatted(.relative(presentation: .named)))
-                        .font(.caption).foregroundStyle(.secondary)
+                        .font(.app(.caption)).foregroundStyle(.secondary)
                 }
-                Text(comment.body).font(.subheadline).textSelection(.enabled)
+                Text(comment.body).font(.app(.subheadline)).textSelection(.enabled)
             }
             .padding(12)
             .frame(maxWidth: .infinity, alignment: .leading)

@@ -15,7 +15,7 @@ struct Avatar: View {
         ZStack {
             Circle().fill(Theme.tint)
             Text(verbatim: initials)
-                .font(.system(size: size * 0.38, weight: .semibold, design: .rounded))
+                .font(.custom(BrandFont.poppins(.semibold), fixedSize: size * 0.36))
                 .foregroundStyle(Theme.accent)
             if let url = Backend.publicURL(path) {
                 AsyncImage(url: url) { phase in

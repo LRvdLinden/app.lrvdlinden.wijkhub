@@ -17,27 +17,27 @@ struct ConversationsView: View {
                     Avatar(path: c.partnerAvatar, name: c.partnerName, size: 48)
                     VStack(alignment: .leading, spacing: 3) {
                         HStack {
-                            Text(c.partnerName).font(.headline).lineLimit(1)
+                            Text(c.partnerName).font(.app(.headline)).lineLimit(1)
                             Spacer()
                             Text(c.lastMessageAt.formatted(.relative(presentation: .named)))
-                                .font(.caption).foregroundStyle(.secondary)
+                                .font(.app(.caption)).foregroundStyle(.secondary)
                         }
                         if let context = c.contextTitle {
                             Label(context, systemImage: c.listingId != nil ? "tag" : "hand.raised")
-                                .font(.caption.weight(.medium))
+                                .font(.app(.caption, .medium))
                                 .foregroundStyle(Theme.accent)
                                 .lineLimit(1)
                         }
                         HStack {
                             Text(preview(c))
-                                .font(.subheadline)
+                                .font(.app(.subheadline))
                                 .foregroundStyle(c.unread > 0 ? .primary : .secondary)
                                 .fontWeight(c.unread > 0 ? .semibold : .regular)
                                 .lineLimit(2)
                             Spacer()
                             if c.unread > 0 {
                                 Text(verbatim: "\(c.unread)")
-                                    .font(.caption.bold())
+                                    .font(.app(.caption, .bold))
                                     .padding(.horizontal, 7).padding(.vertical, 3)
                                     .background(Theme.accent, in: Capsule())
                                     .foregroundStyle(Theme.onAccent)
@@ -113,7 +113,7 @@ struct ChatView: View {
                 LazyVStack(spacing: 6) {
                     if let context = target.contextTitle {
                         Label(context, systemImage: "tag")
-                            .font(.caption.weight(.medium))
+                            .font(.app(.caption, .medium))
                             .padding(.horizontal, 12).padding(.vertical, 6)
                             .background(Theme.tint, in: Capsule())
                             .foregroundStyle(Theme.accent)
@@ -122,7 +122,7 @@ struct ChatView: View {
                     ForEach(Array(messages.enumerated()), id: \.element.id) { index, message in
                         if showsDay(at: index) {
                             Text(message.createdAt.formatted(date: .abbreviated, time: .omitted))
-                                .font(.caption)
+                                .font(.app(.caption))
                                 .foregroundStyle(.secondary)
                                 .padding(.vertical, 6)
                         }
@@ -148,7 +148,7 @@ struct ChatView: View {
                 NavigationLink(value: Route.profile(target.partnerId)) {
                     HStack(spacing: 8) {
                         Avatar(path: target.partnerAvatar, name: target.partnerName, size: 30)
-                        Text(target.partnerName).font(.headline).lineLimit(1)
+                        Text(target.partnerName).font(.app(.headline)).lineLimit(1)
                     }
                 }
                 .buttonStyle(.plain)
@@ -173,7 +173,7 @@ struct ChatView: View {
                 .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Theme.line))
             Button { Task { await send() } } label: {
                 Image(systemName: "arrow.up")
-                    .font(.headline)
+                    .font(.app(.headline))
                     .frame(width: 40, height: 40)
                     .background(Theme.accent, in: Circle())
                     .foregroundStyle(Theme.onAccent)
@@ -246,7 +246,7 @@ private struct Bubble: View {
                 Text(message.body)
                     .textSelection(.enabled)
                 Text(message.createdAt.formatted(date: .omitted, time: .shortened))
-                    .font(.caption2)
+                    .font(.app(.caption2))
                     .opacity(0.7)
             }
             .padding(.horizontal, 12).padding(.vertical, 8)

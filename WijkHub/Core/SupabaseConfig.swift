@@ -1,10 +1,10 @@
 import Foundation
 
-/// Vul hier de gegevens van je Supabase-project in (Project Settings → API).
-/// De anon key is publiek bedoeld; de beveiliging zit in de RLS-regels van de database.
+/// Supabase-project van WijkHub. De publishable key is publiek bedoeld (staat in elke app-build);
+/// de beveiliging zit in de RLS-regels van de database. Zet hier NOOIT de secret/service key.
 enum SupabaseConfig {
-    static let url = URL(string: "https://YOUR-PROJECT.supabase.co")!
-    static let anonKey = "YOUR-ANON-KEY"
+    static let url = URL(string: "https://joigkwgvnidvgmbucoqg.supabase.co")!
+    static let anonKey = "sb_publishable__lghEgEAygPUQVAjsJwKhg_8M8_oYJl"
 
     static var isConfigured: Bool { !anonKey.hasPrefix("YOUR-") && !url.absoluteString.contains("YOUR-PROJECT") }
 }

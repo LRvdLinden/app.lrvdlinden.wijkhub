@@ -6,11 +6,14 @@ struct WijkHubApp: App {
     @State private var lock = AppLock()
     @AppStorage("ui.appearance") private var appearance: AppearanceSetting = .system
 
+    init() { BrandAppearance.apply() }
+
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environment(model)
                 .environment(lock)
+                .font(.app(.body))
                 .preferredColorScheme(appearance.colorScheme)
                 .tint(Theme.accent)
         }

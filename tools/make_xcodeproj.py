@@ -6,7 +6,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NAME = "WijkHub"
 BUNDLE_ID = "app.lrvdlinden.wijkhub"
 TEAM = "EU3UY476T6"
-VERSION, BUILD = "1.0.0", "2"
+VERSION, BUILD = "1.0.0", "3"
 REGIONS = ["en", "Base", "nl", "de", "fr", "es", "it", "sv", "nb", "da", "pl"]
 
 

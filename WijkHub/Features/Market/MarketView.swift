@@ -132,7 +132,7 @@ struct Chip: View {
                 if let symbol { Image(systemName: symbol) }
                 Text(title)
             }
-            .font(.subheadline.weight(.medium))
+            .font(.app(.subheadline, .medium))
             .padding(.horizontal, 12)
             .frame(minHeight: 36)
             .background(selected ? Theme.accent : Theme.card, in: Capsule())
@@ -159,7 +159,7 @@ struct ListingCard: View {
                         }
                     } else {
                         Image(systemName: listing.category.symbol)
-                            .font(.largeTitle)
+                            .font(.app(.largeTitle))
                             .foregroundStyle(Theme.accent.opacity(0.6))
                     }
                 }
@@ -171,11 +171,11 @@ struct ListingCard: View {
                 }
                 .opacity(listing.status == .verkocht ? 0.55 : 1)
             Text(listing.titel)
-                .font(.subheadline.weight(.semibold))
+                .font(.app(.subheadline, .semibold))
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
             Text(listing.priceText)
-                .font(.subheadline.weight(.bold))
+                .font(.app(.subheadline, .bold))
                 .foregroundStyle(Theme.accent)
         }
         .accessibilityElement(children: .combine)
@@ -188,7 +188,7 @@ struct StatusBadge: View {
 
     var body: some View {
         Text(status.label(for: kind))
-            .font(.caption.weight(.bold))
+            .font(.app(.caption, .bold))
             .padding(.horizontal, 8).padding(.vertical, 4)
             .background(status == .verkocht ? Color.black.opacity(0.7) : Color.orange, in: Capsule())
             .foregroundStyle(.white)

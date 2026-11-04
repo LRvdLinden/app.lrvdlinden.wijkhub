@@ -119,8 +119,8 @@ private struct BigAction: View {
     var body: some View {
         Button(action: action) {
             VStack(spacing: 8) {
-                Image(systemName: symbol).font(.title2)
-                Text(title).font(.subheadline.weight(.semibold))
+                Image(systemName: symbol).font(.app(.title2))
+                Text(title).font(.app(.subheadline, .semibold))
             }
             .frame(maxWidth: .infinity, minHeight: 84)
             .background(Theme.tint, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -136,27 +136,27 @@ struct HelpRow: View {
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: item.category.symbol)
-                .font(.title3)
+                .font(.app(.title3))
                 .foregroundStyle(Theme.accent)
                 .frame(width: 44, height: 44)
                 .background(Theme.tint, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 6) {
                     Text(item.soort.label)
-                        .font(.caption.weight(.bold))
+                        .font(.app(.caption, .bold))
                         .padding(.horizontal, 8).padding(.vertical, 3)
                         .background(item.soort == .vraag ? Color.orange.opacity(0.18) : Theme.tint, in: Capsule())
                         .foregroundStyle(item.soort == .vraag ? Color.orange : Theme.accent)
                     if !item.isOpen {
-                        Text("Completed").font(.caption.weight(.bold)).foregroundStyle(.secondary)
+                        Text("Completed").font(.app(.caption, .bold)).foregroundStyle(.secondary)
                     }
                 }
-                Text(item.titel).font(.headline).lineLimit(2)
+                Text(item.titel).font(.app(.headline)).lineLimit(2)
                 if !item.beschrijving.isEmpty {
-                    Text(item.beschrijving).font(.subheadline).foregroundStyle(.secondary).lineLimit(2)
+                    Text(item.beschrijving).font(.app(.subheadline)).foregroundStyle(.secondary).lineLimit(2)
                 }
                 Text(verbatim: "\(item.authorName) · \(item.createdAt.formatted(.relative(presentation: .named)))")
-                    .font(.caption)
+                    .font(.app(.caption))
                     .foregroundStyle(.secondary)
             }
             Spacer(minLength: 0)
@@ -193,7 +193,7 @@ struct HelpDetailView: View {
                 NavigationLink(value: Route.profile(item.authorId)) {
                     HStack(spacing: 12) {
                         Avatar(path: item.authorAvatar, name: item.authorName, size: 44)
-                        Text(item.authorName).font(.headline)
+                        Text(item.authorName).font(.app(.headline))
                         Spacer()
                         Image(systemName: "chevron.right").foregroundStyle(.tertiary)
                     }
@@ -330,7 +330,7 @@ struct HelpEditor: View {
                     }
                 }
                 if let error {
-                    Section { Text(error).foregroundStyle(.red).font(.footnote) }
+                    Section { Text(error).foregroundStyle(.red).font(.app(.footnote)) }
                 }
             }
             .navigationTitle(kind == .vraag ? LocalizedStringKey("Ask for help") : LocalizedStringKey("Offer help"))

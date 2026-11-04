@@ -66,7 +66,7 @@ struct ComposePostView: View {
                     }
                 }
                 if let error {
-                    Section { Text(error).foregroundStyle(.red).font(.footnote) }
+                    Section { Text(error).foregroundStyle(.red).font(.app(.footnote)) }
                 }
             }
             .navigationTitle("New message")

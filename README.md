@@ -2,7 +2,7 @@
 
 Alles van je wijk, op één plek. WijkHub brengt de WhatsApp-groepen van een wijk samen in één app: buurtchat, weggeefhoek, marktplaats, ondernemershoek en buurtpreventie, met profielen, berichten met foto's, reacties en likes.
 
-- **Bundle ID:** `app.lrvdlinden.wijkhub` · versie 1.0.0 (2) · team `EU3UY476T6`
+- **Bundle ID:** `app.lrvdlinden.wijkhub` · versie 1.0.0 (3) · team `EU3UY476T6`
 - **Platforms:** iPhone, iPad en Mac (Mac Catalyst) · iOS 17+ / macOS 14+ · Android volgt in fase 4
 - **Backend:** Supabase (database, inloggen, foto-opslag)
 - **Talen:** Nederlands, Engels, Duits, Frans, Spaans, Italiaans, Zweeds, Noors, Deens, Pools

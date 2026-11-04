@@ -23,7 +23,7 @@ struct SignInView: View {
                 VStack(spacing: 14) {
                     BrandLogo(markSize: 56)
                     Text("Everything from your neighbourhood in one place")
-                        .font(.title3)
+                        .font(.app(.title3))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.secondary)
                 }
@@ -31,7 +31,7 @@ struct SignInView: View {
 
                 if !SupabaseConfig.isConfigured {
                     Label("The server is not connected yet.", systemImage: "exclamationmark.triangle")
-                        .font(.footnote)
+                        .font(.app(.footnote))
                         .padding(12)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .background(Theme.tint, in: RoundedRectangle(cornerRadius: 12))
@@ -55,7 +55,7 @@ struct SignInView: View {
                         .disabled(!emailValid || busy)
                     } else {
                         Text("We sent a code to \(email). Enter it below.")
-                            .font(.subheadline)
+                            .font(.app(.subheadline))
                             .multilineTextAlignment(.center)
                         TextField("6-digit code", text: $code)
                             .textContentType(.oneTimeCode)
@@ -74,13 +74,13 @@ struct SignInView: View {
                         Button("Use another e-mail address") {
                             codeSent = false; code = ""; error = nil
                         }
-                        .font(.subheadline)
+                        .font(.app(.subheadline))
                     }
                 }
 
                 HStack {
                     Rectangle().fill(Theme.line).frame(height: 1)
-                    Text("or").font(.footnote).foregroundStyle(.secondary)
+                    Text("or").font(.app(.footnote)).foregroundStyle(.secondary)
                     Rectangle().fill(Theme.line).frame(height: 1)
                 }
 
@@ -97,7 +97,7 @@ struct SignInView: View {
 
                 if let error {
                     Text(error)
-                        .font(.footnote)
+                        .font(.app(.footnote))
                         .foregroundStyle(.red)
                         .multilineTextAlignment(.center)
                 }
@@ -177,7 +177,7 @@ struct PrimaryButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.headline)
+            .font(.app(.headline))
             .frame(maxWidth: .infinity, minHeight: 50)
             .background(Theme.accent.opacity(isEnabled ? 1 : 0.4), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
             .foregroundStyle(Theme.onAccent)

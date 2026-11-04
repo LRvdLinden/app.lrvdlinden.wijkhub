@@ -51,7 +51,7 @@ struct BrandLogo: View {
                 .frame(width: markSize, height: markSize)
             (Text(verbatim: "Wijk").foregroundStyle(onGreen ? Color.white : Theme.green)
              + Text(verbatim: "Hub").foregroundStyle(onGreen ? Color(light: 0xB9E08A, dark: 0xB9E08A) : Theme.lime))
-                .font(.system(size: markSize * 0.82, weight: .heavy, design: .rounded))
+                .font(.display(size: markSize * 0.86))
                 .kerning(-markSize * 0.02)
         }
         .accessibilityElement(children: .ignore)

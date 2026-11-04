@@ -42,7 +42,7 @@ struct FeedView: View {
                 }
                 if let group, !group.beschrijving.isEmpty, group.soort != .preventie {
                     Text(group.beschrijving)
-                        .font(.subheadline)
+                        .font(.app(.subheadline))
                         .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -135,15 +135,15 @@ struct EmergencyBanner: View {
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: "phone.fill")
-                .font(.title3)
+                .font(.app(.title3))
                 .foregroundStyle(.white)
                 .frame(width: 40, height: 40)
                 .background(.red, in: Circle())
             VStack(alignment: .leading, spacing: 4) {
                 Text("Emergency? Call 112 first")
-                    .font(.headline)
+                    .font(.app(.headline))
                 Text("Suspicious situation without danger: call the police on 0900-8844. Then warn your neighbours here.")
-                    .font(.subheadline)
+                    .font(.app(.subheadline))
                     .foregroundStyle(.secondary)
             }
             Spacer(minLength: 0)

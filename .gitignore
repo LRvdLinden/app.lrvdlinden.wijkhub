@@ -4,3 +4,6 @@ DerivedData/
 .build/
 .swiftpm/
 *.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Social Gothic heeft geen open licentie: niet in de openbare repo (wel in de Xcode-zip)
+WijkHub/Resources/Fonts/Licensed/

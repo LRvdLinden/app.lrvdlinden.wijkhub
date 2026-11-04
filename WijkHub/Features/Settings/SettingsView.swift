@@ -114,7 +114,7 @@ struct WhatsNewView: View {
                 Section {
                     VStack(alignment: .leading, spacing: 6) {
                         BrandLogo(markSize: 36)
-                        Text(verbatim: "1.0.0").font(.subheadline).foregroundStyle(.secondary)
+                        Text(verbatim: "1.0.0").font(.app(.subheadline)).foregroundStyle(.secondary)
                     }
                     .padding(.vertical, 6)
                 }
@@ -152,16 +152,16 @@ struct ReportsAdminView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
                         Label(kind(report), systemImage: symbol(report))
-                            .font(.subheadline.weight(.semibold))
+                            .font(.app(.subheadline, .semibold))
                         Spacer()
                         Text(report.createdAt.formatted(.relative(presentation: .named)))
-                            .font(.caption).foregroundStyle(.secondary)
+                            .font(.app(.caption)).foregroundStyle(.secondary)
                     }
-                    Text(report.reden).font(.body)
+                    Text(report.reden).font(.app(.body))
                     HStack {
                         if let postId = report.postId {
                             NavigationLink("View message") { PostDetailView(postId: postId, initial: nil).withRoutes() }
-                                .font(.subheadline)
+                                .font(.app(.subheadline))
                             Spacer()
                             Button("Hide message") { Task { await hide(postId, report: report) } }
                                 .buttonStyle(.bordered)
@@ -175,7 +175,7 @@ struct ReportsAdminView: View {
                             Spacer()
                         } else if let profileId = report.profileId {
                             NavigationLink("View profile") { ProfileView(userId: profileId).withRoutes() }
-                                .font(.subheadline)
+                                .font(.app(.subheadline))
                             Spacer()
                         } else {
                             Spacer()

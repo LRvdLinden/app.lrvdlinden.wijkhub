@@ -32,7 +32,7 @@ struct ProfileView: View {
                 }
                 if !listings.isEmpty {
                     Text("In the market")
-                        .font(.headline)
+                        .font(.app(.headline))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 8)
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -46,7 +46,7 @@ struct ProfileView: View {
                 }
                 if !posts.isEmpty {
                     Text("Messages")
-                        .font(.headline)
+                        .font(.app(.headline))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 8)
                 }
@@ -109,14 +109,14 @@ struct ProfileView: View {
         VStack(spacing: 10) {
             Avatar(path: profile?.avatarPath, name: profile?.displayName ?? "", size: 96)
             Text(profile?.displayName ?? " ")
-                .font(.title2.bold())
+                .font(.display(.title2))
             if let profile, !profile.straat.isEmpty || model.wijk != nil {
                 Label {
                     Text([profile.straat, model.wijk?.naam].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: ", "))
                 } icon: {
                     Image(systemName: "mappin.and.ellipse")
                 }
-                .font(.subheadline)
+                .font(.app(.subheadline))
                 .foregroundStyle(.secondary)
             }
             if let bio = profile?.bio, !bio.isEmpty {
@@ -135,7 +135,7 @@ struct ProfileView: View {
                         }
                     }
                 }
-                .font(.subheadline.weight(.medium))
+                .font(.app(.subheadline, .medium))
                 .padding(.top, 4)
             }
         }

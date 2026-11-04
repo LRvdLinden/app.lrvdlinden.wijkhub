@@ -38,7 +38,7 @@ struct OnboardingView: View {
                         case .rules: rulesStep
                         }
                         if let error {
-                            Text(error).font(.footnote).foregroundStyle(.red)
+                            Text(error).font(.app(.footnote)).foregroundStyle(.red)
                         }
                     }
                     .padding(24)
@@ -96,7 +96,7 @@ struct OnboardingView: View {
                             Avatar(path: nil, name: name, size: 96)
                         }
                         Image(systemName: "camera.fill")
-                            .font(.footnote)
+                            .font(.app(.footnote))
                             .padding(7)
                             .background(Theme.accent, in: Circle())
                             .foregroundStyle(Theme.onAccent)
@@ -141,12 +141,12 @@ struct OnboardingView: View {
                 Button { selectedWijk = wijk } label: {
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(wijk.naam).font(.headline)
-                            Text(wijk.plaats).font(.subheadline).foregroundStyle(.secondary)
+                            Text(wijk.naam).font(.app(.headline))
+                            Text(wijk.plaats).font(.app(.subheadline)).foregroundStyle(.secondary)
                         }
                         Spacer()
                         Image(systemName: selectedWijk == wijk ? "checkmark.circle.fill" : "circle")
-                            .font(.title3)
+                            .font(.app(.title3))
                             .foregroundStyle(selectedWijk == wijk ? Theme.accent : Color.secondary)
                     }
                     .padding(14)
@@ -159,7 +159,7 @@ struct OnboardingView: View {
             }
             if !wijken.isEmpty && filteredWijken.isEmpty {
                 Text("No neighbourhood found. Ask your neighbourhood council to add it.")
-                    .font(.subheadline).foregroundStyle(.secondary)
+                    .font(.app(.subheadline)).foregroundStyle(.secondary)
             }
         }
     }
@@ -175,7 +175,7 @@ struct OnboardingView: View {
                 RuleRow(symbol: "flag", text: "Report messages that break the rules. The administrators can remove them and block people.")
             }
             if let terms = AppLinks.terms {
-                Link("Read the full terms of use", destination: terms).font(.subheadline)
+                Link("Read the full terms of use", destination: terms).font(.app(.subheadline))
             }
             Toggle("I agree to the house rules and terms of use", isOn: $agreed)
                 .tint(Theme.accent)
@@ -254,8 +254,8 @@ private struct StepHeader: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(title).font(.title2.bold())
-            Text(text).font(.body).foregroundStyle(.secondary)
+            Text(title).font(.display(.title2))
+            Text(text).font(.app(.body)).foregroundStyle(.secondary)
         }
     }
 }

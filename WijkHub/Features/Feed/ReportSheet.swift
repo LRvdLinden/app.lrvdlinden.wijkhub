@@ -58,7 +58,7 @@ struct ReportSheet: View {
                 }
                 Section {
                     Text("The administrators of your neighbourhood will look at your report. The person you report will not see who reported it.")
-                        .font(.footnote).foregroundStyle(.secondary)
+                        .font(.app(.footnote)).foregroundStyle(.secondary)
                 }
             }
             .navigationTitle("Report")

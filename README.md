@@ -2,7 +2,7 @@
 
 Alles van je wijk, op één plek. WijkHub brengt de WhatsApp-groepen van een wijk samen in één app: buurtchat, weggeefhoek, marktplaats, ondernemershoek en buurtpreventie, met profielen, berichten met foto's, reacties en likes.
 
-- **Bundle ID:** `app.lrvdlinden.wijkhub` · versie 1.0.0 (3) · team `EU3UY476T6`
+- **Bundle ID:** `app.lrvdlinden.wijkhub` · versie 1.0.0 (4) · team `EU3UY476T6`
 - **Platforms:** iPhone, iPad en Mac (Mac Catalyst) · iOS 17+ / macOS 14+ · Android volgt in fase 4
 - **Backend:** Supabase (database, inloggen, foto-opslag)
 - **Talen:** Nederlands, Engels, Duits, Frans, Spaans, Italiaans, Zweeds, Noors, Deens, Pools
@@ -36,10 +36,13 @@ Volgende fases: evenementen, ondernemers met goedkeuring, preventiemeldingen (3)
 2. **SQL Editor** → draai de migraties in `supabase/migrations/` op volgorde:
    1. `20261104000000_init.sql`: tabellen, beveiliging (RLS), fotobucket `media`, wijk Zuidbroek met vaste groepen
    2. `20261104020000_fase2.sql`: markt, hulp & diensten, privéberichten (incl. realtime voor de chat)
-3. **Authentication → Providers**
-   - *Email*: aan. Zet in **Email Templates → Magic Link** de code erin met `{{ .Token }}` (de app werkt met een 6-cijferige code).
+   3. `20261105000000_eerste_beheerder.sql`: het eerste lid van een wijk wordt automatisch beheerder
+   *(Op project `joigkwgvnidvgmbucoqg` zijn alle drie al uitgevoerd.)*
+3. **Authentication**
+   - *URL Configuration*: Site URL `https://wijk-hub.nl`, Redirect URL `wijkhub://login` (staat al goed).
+   - *Email*: de app werkt met de inloglink uit de standaardmail én met een 6-cijferige code. Voor de code en voor mail aan iedereen (niet alleen je Supabase-team) is eigen SMTP nodig; zet dan in het sjabloon *Magic link or OTP* `{{ .Token }}`.
    - *Apple*: aan, met Client ID `app.lrvdlinden.wijkhub`.
-4. Jezelf beheerder maken (na je eerste aanmelding in de app):
+4. Het eerste lid van een wijk wordt automatisch beheerder. Iemand anders beheerder maken:
    ```sql
    update wijk_members set rol = 'beheerder'
    where user_id = (select id from auth.users where email = 'jouw@email.nl');

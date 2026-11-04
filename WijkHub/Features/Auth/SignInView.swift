@@ -54,7 +54,7 @@ struct SignInView: View {
                         .buttonStyle(PrimaryButtonStyle())
                         .disabled(!emailValid || busy)
                     } else {
-                        Text("We sent a code to \(email). Enter it below.")
+                        Text("We sent an e-mail to \(email). Tap the link in it, or enter the code below.")
                             .font(.app(.subheadline))
                             .multilineTextAlignment(.center)
                         TextField("6-digit code", text: $code)

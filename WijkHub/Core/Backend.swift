@@ -5,11 +5,19 @@ import Supabase
 enum Backend {
     static let client = SupabaseClient(supabaseURL: SupabaseConfig.url, supabaseKey: SupabaseConfig.anonKey)
     static var auth: AuthClient { client.auth }
+    static let loginRedirect = URL(string: "wijkhub://login")!
+
+    /// Inloglink uit de e-mail geopend → sessie maken.
+    static func handleLoginLink(_ url: URL) async {
+        guard url.scheme == "wijkhub", url.host == "login" else { return }
+        _ = try? await auth.session(from: url)
+    }
 
     // MARK: Inloggen
 
     static func sendEmailCode(_ email: String) async throws {
-        try await auth.signInWithOTP(email: email, shouldCreateUser: true)
+        // Werkt met beide e-mailsjablonen: een 6-cijferige code ({{ .Token }}) of de inloglink (komt terug via wijkhub://login)
+        try await auth.signInWithOTP(email: email, redirectTo: loginRedirect, shouldCreateUser: true)
     }
 
     static func verifyEmailCode(_ email: String, code: String) async throws {

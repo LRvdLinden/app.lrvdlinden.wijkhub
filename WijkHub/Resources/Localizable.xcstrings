@@ -12332,6 +12332,65 @@
         }
       }
     },
+    "We sent an e-mail to %@. Tap the link in it, or enter the code below.": {
+      "extractionState": "manual",
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We hebben een e-mail gestuurd naar %@. Tik op de link erin, of vul hieronder de code in."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wir haben eine E-Mail an %@ gesendet. Tippe auf den Link darin oder gib unten den Code ein."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nous avons envoyé un e-mail à %@. Touchez le lien qu'il contient ou saisissez le code ci-dessous."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hemos enviado un correo a %@. Toca el enlace o introduce el código abajo."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abbiamo inviato un'email a %@. Tocca il link oppure inserisci il codice qui sotto."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vi har skickat ett mejl till %@. Tryck på länken eller ange koden nedan."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vi har sendt en e-post til %@. Trykk på lenken, eller skriv inn koden nedenfor."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vi har sendt en e-mail til %@. Tryk på linket, eller indtast koden nedenfor."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wysłaliśmy e-mail na adres %@. Kliknij link lub wpisz kod poniżej."
+          }
+        }
+      }
+    },
     "What are you giving away? Where can it be picked up?": {
       "extractionState": "manual",
       "localizations": {

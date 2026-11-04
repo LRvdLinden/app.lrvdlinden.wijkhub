@@ -53,8 +53,9 @@ struct RootView: View {
         .onChange(of: scenePhase) { _, phase in
             if phase == .background { lock.lockIfNeeded() }
         }
-        .onOpenURL { _ in
-            // wijkhub://… — deep links volgen in fase 4 (meldingen, widgets).
+        .onOpenURL { url in
+            // wijkhub://login: inloglink uit de e-mail. Overige deep links volgen in fase 4.
+            Task { await Backend.handleLoginLink(url) }
         }
         .reviewPrompt(isCalm: model.phase == .ready && !lock.isLocked && !showSplash)
     }

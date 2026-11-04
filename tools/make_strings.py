@@ -38,7 +38,7 @@ pats = [
 ignore = {"spam", "beledigend", "persoonsgegevens", "bedreigend", "anders", "31"}
 missing = set()
 for f in glob.glob(os.path.join(ROOT, "WijkHub", "**", "*.swift"), recursive=True):
-    if f.endswith(("MoreAppsCard.swift", "AppInfoFooter.swift")):
+    if f.endswith(("MoreAppsCard.swift", "AppInfoFooter.swift", "Typography.swift")):
         continue
     s = open(f, encoding="utf-8").read()
     for p in pats:

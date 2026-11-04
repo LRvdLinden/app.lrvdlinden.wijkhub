@@ -83,3 +83,8 @@ tools/          vertalingen en projectgenerator
 ---
 
 Meer apps van de ontwikkelaar: [lrvdlinden.app](https://lrvdlinden.app)
+
+## Huisstijl
+- Kleuren van Samen Zuidbroek: donkergroen `#0B7D36`, lichtgroen `#8EC152`, wit
+- Letters: **Poppins** (tekst, SIL Open Font License, in `WijkHub/Resources/Fonts`) en **Social Gothic** (koppen en woordmerk)
+- Social Gothic staat **niet** in deze openbare repo (geen open licentie). Zet `SocialGothic-Bold.otf` en `SocialGothic-DemiBold.otf` in `WijkHub/Resources/Fonts/Licensed/`; zonder die bestanden valt de app terug op Poppins Bold.

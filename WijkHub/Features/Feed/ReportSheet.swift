@@ -4,12 +4,16 @@ enum ReportTarget: Identifiable, Hashable {
     case post(UUID, wijk: UUID)
     case comment(UUID, wijk: UUID)
     case profile(UUID, wijk: UUID)
+    case listing(UUID, wijk: UUID)
+    case help(UUID, wijk: UUID)
 
     var id: String {
         switch self {
         case .post(let id, _): "p-\(id)"
         case .comment(let id, _): "c-\(id)"
         case .profile(let id, _): "u-\(id)"
+        case .listing(let id, _): "l-\(id)"
+        case .help(let id, _): "h-\(id)"
         }
     }
 }
@@ -88,6 +92,8 @@ struct ReportSheet: View {
         case .post(let id, let wijk): report = .init(wijk_id: wijk, reporter_id: me, post_id: id, reden: reden)
         case .comment(let id, let wijk): report = .init(wijk_id: wijk, reporter_id: me, comment_id: id, reden: reden)
         case .profile(let id, let wijk): report = .init(wijk_id: wijk, reporter_id: me, profile_id: id, reden: reden)
+        case .listing(let id, let wijk): report = .init(wijk_id: wijk, reporter_id: me, listing_id: id, reden: reden)
+        case .help(let id, let wijk): report = .init(wijk_id: wijk, reporter_id: me, help_id: id, reden: reden)
         }
         do {
             try await Backend.report(report)

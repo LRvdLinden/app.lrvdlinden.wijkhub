@@ -8,7 +8,11 @@ enum Route: Hashable {
 
 /// Tijdlijn van de hele wijk, of van één groep.
 struct FeedView: View {
-    var group: BuurtGroup?
+    var fixedGroup: BuurtGroup?
+    /// Toon chips om op groep te filteren (alleen op de wijk-tijdlijn).
+    var showsGroupChips = false
+    @State private var chosenGroup: BuurtGroup?
+    private var group: BuurtGroup? { fixedGroup ?? chosenGroup }
 
     @Environment(AppModel.self) private var model
     @State private var posts: [Post] = []
@@ -21,6 +25,18 @@ struct FeedView: View {
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 12) {
+                if showsGroupChips && !model.feedGroups.isEmpty {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 8) {
+                            Chip(title: "All", selected: chosenGroup == nil) { chosenGroup = nil }
+                            ForEach(model.feedGroups) { g in
+                                Chip(title: LocalizedStringKey(g.naam), symbol: g.soort.symbol, selected: chosenGroup == g) {
+                                    chosenGroup = chosenGroup == g ? nil : g
+                                }
+                            }
+                        }
+                    }
+                }
                 if group?.soort == .preventie {
                     EmergencyBanner()
                 }
@@ -86,7 +102,7 @@ struct FeedView: View {
         .navigationDestination(item: $openPost) { post in
             PostDetailView(postId: post.id, initial: post)
         }
-        .task(id: model.feedVersion) { await refresh() }
+        .task(id: "\(model.feedVersion)-\(group?.id.uuidString ?? "all")") { await refresh() }
     }
 
     private func refresh() async {

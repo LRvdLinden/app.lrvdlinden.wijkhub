@@ -2,7 +2,7 @@
 
 Alles van je wijk, op één plek. WijkHub brengt de WhatsApp-groepen van een wijk samen in één app: buurtchat, weggeefhoek, marktplaats, ondernemershoek en buurtpreventie, met profielen, berichten met foto's, reacties en likes.
 
-- **Bundle ID:** `app.lrvdlinden.wijkhub` · versie 1.0.0 (1) · team `EU3UY476T6`
+- **Bundle ID:** `app.lrvdlinden.wijkhub` · versie 1.0.0 (2) · team `EU3UY476T6`
 - **Platforms:** iPhone, iPad en Mac (Mac Catalyst) · iOS 17+ / macOS 14+ · Android volgt in fase 4
 - **Backend:** Supabase (database, inloggen, foto-opslag)
 - **Talen:** Nederlands, Engels, Duits, Frans, Spaans, Italiaans, Zweeds, Noors, Deens, Pools
@@ -19,13 +19,23 @@ Alles van je wijk, op één plek. WijkHub brengt de WhatsApp-groepen van een wij
 - Face ID-vergrendeling, weergave Automatisch/Licht/Donker, account verwijderen
 - Vaste onderdelen: privacy manifest, MoreAppsCard, app-info-footer, review-prompt
 
-Volgende fases: marktplaats met verkocht zetten, diensten/hulp, privéberichten (2) · evenementen, ondernemers met goedkeuring, preventiemeldingen (3) · push, widgets, Siri, deel-extensie, Android (4).
+## Fase 2
+
+- **Markt** (tabblad): te koop en gratis (weggeefhoek) met foto's (max. 6), categorie, vaste prijs of bieden, status Beschikbaar / Gereserveerd / Verkocht (of Weggegeven); zoeken, filteren, verkochte spullen tonen
+- **Hulp & diensten** (tabblad): hulp vragen of aanbieden, per categorie (klussen, tuin, oppas, boodschappen, vervoer, computer, dieren, gezelschap), afronden
+- **Berichten** (tabblad): 1-op-1 privéberichten, live bijgewerkt, ongelezen-teller op het tabblad; starten vanuit een advertentie, hulpvraag of profiel
+- Wijk-tijdlijn met groepfilters bovenaan; profiel toont ook iemands advertenties; instellingen via het tandwiel op je profiel
+- Melden en verbergen werkt ook voor advertenties en hulpberichten
+
+Volgende fases: evenementen, ondernemers met goedkeuring, preventiemeldingen (3) · push, widgets, Siri, deel-extensie, Android (4).
 
 ## Opzetten
 
 ### 1. Supabase
 1. Maak een project op supabase.com.
-2. **SQL Editor** → plak `supabase/migrations/20261104000000_init.sql` → Run. Dit maakt alle tabellen, de beveiliging (RLS), de fotobucket `media` en de wijk Zuidbroek met de vaste groepen.
+2. **SQL Editor** → draai de migraties in `supabase/migrations/` op volgorde:
+   1. `20261104000000_init.sql`: tabellen, beveiliging (RLS), fotobucket `media`, wijk Zuidbroek met vaste groepen
+   2. `20261104020000_fase2.sql`: markt, hulp & diensten, privéberichten (incl. realtime voor de chat)
 3. **Authentication → Providers**
    - *Email*: aan. Zet in **Email Templates → Magic Link** de code erin met `{{ .Token }}` (de app werkt met een 6-cijferige code).
    - *Apple*: aan, met Client ID `app.lrvdlinden.wijkhub`.
@@ -61,7 +71,7 @@ WijkHub/
   App/          app-start, AppModel (sessie, profiel, wijk)
   Core/         Backend (Supabase), modellen, Theme, AppLock, ReviewPrompter
   Components/   BrandMark (logo), Avatar, MoreAppsCard, AppInfoFooter
-  Features/     Splash, Auth, Onboarding, Feed, Profile, Settings, Main
+  Features/     Splash, Auth, Onboarding, Feed, Market, Help, Messages, Profile, Settings, Main
   Resources/    Assets, String Catalogs, PrivacyInfo.xcprivacy
 supabase/       database-migraties
 design/         logo en app-icoon (SVG)

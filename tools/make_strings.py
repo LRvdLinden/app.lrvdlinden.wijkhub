@@ -47,7 +47,7 @@ for f in glob.glob(os.path.join(ROOT, "WijkHub", "**", "*.swift"), recursive=Tru
                 if not g or g in ignore or re.fullmatch(r"[a-z0-9.]+", g) or g.startswith("\\("):
                     continue
                 key = re.sub(r"\\\((?:step|Step)[^)]*\)\)?", "%lld", g)
-                key = re.sub(r"\\\([^)]*\)", "%@", key)
+                key = re.sub(r"\\\((?:[^()]|\([^()]*\))*\)", "%@", key)
                 if key not in T:
                     missing.add(key)
 if missing:

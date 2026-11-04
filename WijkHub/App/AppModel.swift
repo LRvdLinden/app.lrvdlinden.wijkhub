@@ -18,6 +18,11 @@ final class AppModel {
     var lastError: String?
     /// Verhoogd na een nieuw bericht, zodat lijsten opnieuw laden.
     var feedVersion = 0
+    /// Aantal ongelezen privéberichten (badge op het tabblad Berichten).
+    var unreadMessages = 0
+
+    /// Groepen voor de tijdlijn; Marktplaats en Weggeefhoek staan in het tabblad Markt.
+    var feedGroups: [BuurtGroup] { groups.filter { $0.soort != .markt && $0.soort != .weggeef } }
 
     var isAdmin: Bool { membership?.isAdmin == true }
 
@@ -61,6 +66,11 @@ final class AppModel {
         }
     }
 
+    func refreshUnread() async {
+        guard phase == .ready, let list = try? await Backend.conversations() else { return }
+        unreadMessages = list.reduce(0) { $0 + $1.unread }
+    }
+
     func signOut() async {
         try? await Backend.signOut()
         reset()
@@ -74,6 +84,7 @@ final class AppModel {
     private func reset() {
         userId = nil; email = nil; profile = nil; contact = nil
         wijk = nil; membership = nil; groups = []
+        unreadMessages = 0
         phase = .signedOut
     }
 }

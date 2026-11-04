@@ -13,6 +13,9 @@ struct ProfileView: View {
     @State private var reportTarget: ReportTarget?
     @State private var confirmBlock = false
     @State private var openPost: Post?
+    @State private var listings: [Listing] = []
+    @State private var chat: ChatTarget?
+    @State private var startingChat = false
 
     private var isMe: Bool { userId == model.userId }
 
@@ -20,6 +23,27 @@ struct ProfileView: View {
         ScrollView {
             VStack(spacing: 16) {
                 header
+                if !isMe, profile != nil {
+                    Button { Task { await startChat() } } label: {
+                        ProgressLabel(title: "Send a message", busy: startingChat)
+                    }
+                    .buttonStyle(PrimaryButtonStyle())
+                    .disabled(startingChat)
+                }
+                if !listings.isEmpty {
+                    Text("In the market")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 8)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 12) {
+                            ForEach(listings) { l in
+                                NavigationLink(value: l) { ListingCard(listing: l).frame(width: 150) }
+                                    .buttonStyle(.plain)
+                            }
+                        }
+                    }
+                }
                 if !posts.isEmpty {
                     Text("Messages")
                         .font(.headline)
@@ -43,6 +67,14 @@ struct ProfileView: View {
             if isMe {
                 ToolbarItem(placement: .primaryAction) {
                     Button("Edit") { editing = true }
+                }
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                    .accessibilityLabel(Text("Settings"))
                 }
             } else if profile != nil {
                 ToolbarItem(placement: .primaryAction) {
@@ -68,6 +100,7 @@ struct ProfileView: View {
             Text("You will no longer see messages and comments from this neighbour.")
         }
         .navigationDestination(item: $openPost) { PostDetailView(postId: $0.id, initial: $0) }
+        .navigationDestination(item: $chat) { ChatView(target: $0) }
         .refreshable { await load() }
         .task(id: model.feedVersion) { await load() }
     }
@@ -127,6 +160,19 @@ struct ProfileView: View {
         phone = contact?.telefoon
         if let wijk = model.wijk?.id {
             posts = (try? await Backend.feed(wijk: wijk, author: userId)) ?? posts
+            listings = (try? await Backend.listings(wijk: wijk, author: userId, includeSold: isMe)) ?? listings
+        }
+    }
+
+    private func startChat() async {
+        startingChat = true
+        defer { startingChat = false }
+        do {
+            let id = try await Backend.startConversation(with: userId)
+            chat = ChatTarget(conversationId: id, partnerId: userId, partnerName: profile?.displayName ?? "",
+                              partnerAvatar: profile?.avatarPath, contextTitle: nil)
+        } catch {
+            model.lastError = String(localized: "Could not start a conversation.")
         }
     }
 

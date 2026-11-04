@@ -15,7 +15,7 @@ struct ComposePostView: View {
     @State private var posted = 0
     @FocusState private var focused: Bool
 
-    private var group: BuurtGroup? { model.groups.first { $0.id == groupId } }
+    private var group: BuurtGroup? { model.feedGroups.first { $0.id == groupId } }
     private var canPost: Bool {
         group != nil && !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !busy
     }
@@ -25,7 +25,7 @@ struct ComposePostView: View {
             Form {
                 Section {
                     Picker("Group", selection: $groupId) {
-                        ForEach(model.groups) { g in
+                        ForEach(model.feedGroups) { g in
                             Label(g.naam, systemImage: g.soort.symbol).tag(Optional(g.id))
                         }
                     }
@@ -83,7 +83,7 @@ struct ComposePostView: View {
         }
         .interactiveDismissDisabled(busy || !text.isEmpty)
         .onAppear {
-            groupId = preselected?.id ?? model.groups.first?.id
+            groupId = preselected?.id ?? model.feedGroups.first?.id
             focused = true
         }
         .onChange(of: items) { _, newItems in

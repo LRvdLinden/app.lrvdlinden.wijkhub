@@ -146,6 +146,8 @@ struct Report: Codable, Identifiable, Hashable, Sendable {
     let postId: UUID?
     let commentId: UUID?
     let profileId: UUID?
+    let listingId: UUID?
+    let helpId: UUID?
     let reden: String
     let status: String
     let createdAt: Date
@@ -157,6 +159,8 @@ struct Report: Codable, Identifiable, Hashable, Sendable {
         case postId = "post_id"
         case commentId = "comment_id"
         case profileId = "profile_id"
+        case listingId = "listing_id"
+        case helpId = "help_id"
         case createdAt = "created_at"
     }
 }

@@ -165,6 +165,8 @@ enum Backend {
         var post_id: UUID?
         var comment_id: UUID?
         var profile_id: UUID?
+        var listing_id: UUID?
+        var help_id: UUID?
         let reden: String
     }
 

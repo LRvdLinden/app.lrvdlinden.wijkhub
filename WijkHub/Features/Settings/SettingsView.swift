@@ -125,6 +125,11 @@ struct WhatsNewView: View {
                     Label("Report and block, so the neighbourhood stays pleasant", systemImage: "flag")
                     Label("Lock the app with Face ID", systemImage: "faceid")
                 }
+                Section {
+                    Label("Market: sell or give away, and mark items as reserved or sold", systemImage: "tag")
+                    Label("Help & services: ask for help or offer it", systemImage: "hand.raised")
+                    Label("Private messages with your neighbours", systemImage: "bubble.left.and.text.bubble.right")
+                }
             }
             .navigationTitle("What's new")
             .navigationBarTitleDisplayMode(.inline)
@@ -146,7 +151,7 @@ struct ReportsAdminView: View {
             ForEach(reports) { report in
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        Label(kind(report), systemImage: report.postId != nil ? "text.bubble" : report.commentId != nil ? "bubble.right" : "person")
+                        Label(kind(report), systemImage: symbol(report))
                             .font(.subheadline.weight(.semibold))
                         Spacer()
                         Text(report.createdAt.formatted(.relative(presentation: .named)))
@@ -160,6 +165,14 @@ struct ReportsAdminView: View {
                             Spacer()
                             Button("Hide message") { Task { await hide(postId, report: report) } }
                                 .buttonStyle(.bordered)
+                        } else if let listingId = report.listingId {
+                            Button("Hide ad") { Task { await hideListing(listingId, report: report) } }
+                                .buttonStyle(.bordered)
+                            Spacer()
+                        } else if let helpId = report.helpId {
+                            Button("Hide post") { Task { await hideHelp(helpId, report: report) } }
+                                .buttonStyle(.bordered)
+                            Spacer()
                         } else if let profileId = report.profileId {
                             NavigationLink("View profile") { ProfileView(userId: profileId).withRoutes() }
                                 .font(.subheadline)
@@ -189,7 +202,35 @@ struct ReportsAdminView: View {
     private func kind(_ report: Report) -> LocalizedStringKey {
         if report.postId != nil { return "Message" }
         if report.commentId != nil { return "Comment" }
+        if report.listingId != nil { return "Ad" }
+        if report.helpId != nil { return "Help & services" }
         return "Profile"
+    }
+
+    private func symbol(_ report: Report) -> String {
+        if report.postId != nil { return "text.bubble" }
+        if report.commentId != nil { return "bubble.right" }
+        if report.listingId != nil { return "tag" }
+        if report.helpId != nil { return "hand.raised" }
+        return "person"
+    }
+
+    private func hideListing(_ id: UUID, report: Report) async {
+        do {
+            try await Backend.setListingHidden(id, hidden: true)
+            try await Backend.closeReport(report.id)
+            reports.removeAll { $0.id == report.id }
+            model.feedVersion += 1
+        } catch { model.lastError = error.localizedDescription }
+    }
+
+    private func hideHelp(_ id: UUID, report: Report) async {
+        do {
+            try await Backend.setHelpHidden(id, hidden: true)
+            try await Backend.closeReport(report.id)
+            reports.removeAll { $0.id == report.id }
+            model.feedVersion += 1
+        } catch { model.lastError = error.localizedDescription }
     }
 
     private func load() async {

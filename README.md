@@ -42,14 +42,11 @@ Volgende fases: marktplaats met verkocht zetten, diensten/hulp, privéberichten 
 ### 2. App-sleutels
 Vul `WijkHub/Core/SupabaseConfig.swift` in met de project-URL en de **anon key** (Project Settings → API). Zolang die leeg zijn, toont het inlogscherm "De server is nog niet gekoppeld".
 
-### 3. Xcode
-```bash
-brew install xcodegen   # eenmalig
-xcodegen                # maakt WijkHub.xcodeproj
-open WijkHub.xcodeproj
-```
-- Capability **Sign in with Apple** staat al in de entitlements.
-- Controleer onder Project → Info → Localizations dat alle 10 talen aan staan.
+### 3. Xcode (16 of nieuwer)
+Open `WijkHub.xcodeproj`. Xcode haalt het Supabase-pakket (2.55.6) zelf op. Nieuwe bestanden in de map `WijkHub/` komen automatisch in het project.
+- Team `EU3UY476T6`, signing Automatic, Sign in with Apple staat in `Config/WijkHub.entitlements`.
+- Info.plist-aanvullingen (talen, URL-schema `wijkhub://`, launch screen) staan in `Config/Info.plist`.
+- Projectbestand opnieuw maken: `python3 tools/make_xcodeproj.py`.
 
 ## Vertalingen
 Teksten staan in `tools/translations.py`. Na wijzigen:
@@ -68,7 +65,9 @@ WijkHub/
   Resources/    Assets, String Catalogs, PrivacyInfo.xcprivacy
 supabase/       database-migraties
 design/         logo en app-icoon (SVG)
-tools/          vertalingen
+Config/         Info.plist en entitlements
+WijkHub.xcodeproj
+tools/          vertalingen en projectgenerator
 ```
 
 ---

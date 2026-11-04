@@ -28,7 +28,7 @@ extension Color {
     }
 }
 
-/// BuurtHub-huisstijl, afgeleid van Samen Zuidbroek (#0B7D36, #8EC152, wit).
+/// WijkHub-huisstijl, afgeleid van Samen Zuidbroek (#0B7D36, #8EC152, wit).
 /// Lichtgroen is te licht voor tekst op wit: alleen voor accenten gebruiken.
 enum Theme {
     static let green = Color(red: 0x0B / 255, green: 0x7D / 255, blue: 0x36 / 255)

@@ -1,4 +1,4 @@
-name: BuurtHub
+name: WijkHub
 options:
   bundleIdPrefix: app.lrvdlinden
   developmentLanguage: en
@@ -20,45 +20,49 @@ settings:
     SWIFT_VERSION: "5.0"
 
 targets:
-  BuurtHub:
+  WijkHub:
     type: application
     platform: iOS
     supportedDestinations: [iOS, macCatalyst]
     deploymentTarget: "17.0"
     sources:
-      - path: BuurtHub
+      - path: WijkHub
     dependencies:
       - package: Supabase
     entitlements:
-      path: BuurtHub/BuurtHub.entitlements
+      path: WijkHub/WijkHub.entitlements
       properties:
         com.apple.developer.applesignin: [Default]
         com.apple.security.app-sandbox: true
         com.apple.security.network.client: true
         com.apple.security.files.user-selected.read-only: true
     info:
-      path: BuurtHub/Info.plist
+      path: WijkHub/Info.plist
       properties:
-        CFBundleDisplayName: BuurtHub
+        CFBundleDisplayName: WijkHub
         LSApplicationCategoryType: public.app-category.social-networking
         ITSAppUsesNonExemptEncryption: false
         UILaunchScreen:
           UIColorName: LaunchBackground
           UIImageName: LaunchMark
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UISupportedInterfaceOrientations~ipad:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
-        NSFaceIDUsageDescription: BuurtHub uses Face ID to lock the app.
+        NSFaceIDUsageDescription: WijkHub uses Face ID to lock the app.
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations: [en, nl, de, fr, es, it, sv, nb, da, pl]
         CFBundleURLTypes:
-          - CFBundleURLName: app.lrvdlinden.buurthub
-            CFBundleURLSchemes: [buurthub]
+          - CFBundleURLName: app.lrvdlinden.wijkhub
+            CFBundleURLSchemes: [wijkhub]
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: app.lrvdlinden.buurthub
-        INFOPLIST_KEY_CFBundleDisplayName: BuurtHub
+        PRODUCT_BUNDLE_IDENTIFIER: app.lrvdlinden.wijkhub
+        INFOPLIST_KEY_CFBundleDisplayName: WijkHub
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.social-networking
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
         TARGETED_DEVICE_FAMILY: "1,2,6"

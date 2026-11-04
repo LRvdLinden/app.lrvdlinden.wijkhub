@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Het BuurtHub-beeldmerk "Thuisballon": huisje + tekstballon met drie puntjes (64 × 64-raster).
+/// Het WijkHub-beeldmerk "Thuisballon": huisje + tekstballon met drie puntjes (64 × 64-raster).
 struct BrandMark: View {
     enum Style { case onLight, onGreen }
     var style: Style = .onLight
@@ -40,7 +40,7 @@ struct BrandMark: View {
     }
 }
 
-/// Beeldmerk + woordmerk "BuurtHub" (Buurt donkergroen, Hub lichtgroen).
+/// Beeldmerk + woordmerk "WijkHub" (Wijk donkergroen, Hub lichtgroen).
 struct BrandLogo: View {
     var markSize: CGFloat = 44
     var onGreen = false
@@ -49,13 +49,13 @@ struct BrandLogo: View {
         HStack(spacing: markSize * 0.25) {
             BrandMark(style: onGreen ? .onGreen : .onLight)
                 .frame(width: markSize, height: markSize)
-            (Text(verbatim: "Buurt").foregroundStyle(onGreen ? Color.white : Theme.green)
+            (Text(verbatim: "Wijk").foregroundStyle(onGreen ? Color.white : Theme.green)
              + Text(verbatim: "Hub").foregroundStyle(onGreen ? Color(light: 0xB9E08A, dark: 0xB9E08A) : Theme.lime))
                 .font(.system(size: markSize * 0.82, weight: .heavy, design: .rounded))
                 .kerning(-markSize * 0.02)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(verbatim: "BuurtHub"))
+        .accessibilityLabel(Text(verbatim: "WijkHub"))
     }
 }
 

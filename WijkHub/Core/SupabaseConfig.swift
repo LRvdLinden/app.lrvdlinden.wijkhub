@@ -11,7 +11,8 @@ enum SupabaseConfig {
 
 /// Links in de instellingen. Leeg = de link wordt niet getoond.
 enum AppLinks {
-    static let privacy: URL? = nil
-    static let support: URL? = nil
-    static let terms: URL? = nil
+    static let website = URL(string: "https://wijk-hub.nl")
+    static let privacy = URL(string: "https://wijk-hub.nl/privacy")
+    static let support = URL(string: "https://wijk-hub.nl/support")
+    static let terms = URL(string: "https://wijk-hub.nl/voorwaarden")
 }

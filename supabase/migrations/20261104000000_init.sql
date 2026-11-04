@@ -1,4 +1,4 @@
--- BuurtHub — fase 1: wijken, profielen, groepen, berichten, reacties, likes, meldingen en blokkades.
+-- WijkHub — fase 1: wijken, profielen, groepen, berichten, reacties, likes, meldingen en blokkades.
 -- Uitvoeren in Supabase: SQL Editor → plak dit bestand → Run (of `supabase db push`).
 
 create extension if not exists pgcrypto;

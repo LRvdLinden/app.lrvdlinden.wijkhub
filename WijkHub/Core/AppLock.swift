@@ -30,7 +30,7 @@ final class AppLock {
     func unlock() async {
         guard isLocked else { return }
         let context = LAContext()
-        let reason = String(localized: "Unlock BuurtHub")
+        let reason = String(localized: "Unlock WijkHub")
         do {
             if try await context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) {
                 isLocked = false
@@ -43,7 +43,7 @@ final class AppLock {
     /// Vraagt eerst Face ID voordat de schakelaar aan gaat.
     func enable() async -> Bool {
         let context = LAContext()
-        let reason = String(localized: "Unlock BuurtHub")
+        let reason = String(localized: "Unlock WijkHub")
         let ok = (try? await context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason)) ?? false
         if ok { isEnabled = true }
         return ok
@@ -59,7 +59,7 @@ struct LockView: View {
             VStack(spacing: 24) {
                 BrandMark(style: .onGreen)
                     .frame(width: 96, height: 96)
-                Text("BuurtHub is locked")
+                Text("WijkHub is locked")
                     .font(.title3.weight(.semibold))
                     .foregroundStyle(.white)
                 Button {

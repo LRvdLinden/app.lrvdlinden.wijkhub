@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct BuurtHubApp: App {
+struct WijkHubApp: App {
     @State private var model = AppModel()
     @State private var lock = AppLock()
     @AppStorage("ui.appearance") private var appearance: AppearanceSetting = .system
@@ -51,7 +51,7 @@ struct RootView: View {
             if phase == .background { lock.lockIfNeeded() }
         }
         .onOpenURL { _ in
-            // buurthub://… — deep links volgen in fase 4 (meldingen, widgets).
+            // wijkhub://… — deep links volgen in fase 4 (meldingen, widgets).
         }
         .reviewPrompt(isCalm: model.phase == .ready && !lock.isLocked && !showSplash)
     }
